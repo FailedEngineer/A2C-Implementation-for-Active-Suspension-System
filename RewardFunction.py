@@ -267,3 +267,39 @@ if __name__ == "__main__":
     print(f"- V3 adds force penalty to encourage efficiency")
     
     print(f"\nEnvironment setup successful! V3 is used as main reward for RL training.")
+class FixedRewardFunction:
+    def __init__(self, k1=10, k2=0.01):
+        self.k1 = k1
+        self.k2 = k2
+        
+    def compute_reward_v1(self, suspension_travel):
+        """First reward function for compatibility."""
+        return -self.k1 * abs(suspension_travel)
+    
+    def compute_reward_v2(self, body_velocity):
+        """Second reward function for compatibility."""
+        return -self.k1 * abs(body_velocity)
+        
+    def compute_reward_v3(self, body_velocity, control_force):
+        """Third reward function - the main one we use."""
+        velocity_term = -self.k1 * (body_velocity ** 2)
+        force_penalty = -self.k2 * abs(control_force)
+        return velocity_term + force_penalty
+    
+    def __call__(self, body_velocity, control_force):
+        """Default call uses the best performing reward function (v3)."""
+        return self.compute_reward_v3(body_velocity, control_force)
+
+class ConservativeRewardFunction:
+    """Ultra-conservative reward function for guaranteed stability."""
+    def __init__(self):
+        self.k1 = 1.0      
+        self.k2 = 0.001    
+        
+    def __call__(self, body_velocity, control_force):
+        body_velocity = np.clip(body_velocity, -2.0, 2.0)
+        control_force = np.clip(control_force, -60, 60)
+        
+        velocity_term = -self.k1 * (body_velocity ** 2)
+        force_penalty = -self.k2 * abs(control_force)
+        return velocity_term + force_penalty

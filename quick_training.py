@@ -14,8 +14,8 @@ def quick_fix_training():
     
     # 2. Much smaller learning rates
     agent = ActorCriticAgent(
-        actor_lr=0.0001,   
-        critic_lr=0.001,   
+        actor_lr=0.0003,   
+        critic_lr=0.003,   
         gamma=0.99
     )
     
@@ -23,8 +23,8 @@ def quick_fix_training():
     trainer = TrainingLoop(
         env=env, 
         agent=agent, 
-        max_episodes=1000,
-        max_steps_per_episode=500
+        max_episodes=2000,
+        max_steps_per_episode=700
     )
     
     # 4. Start fresh training

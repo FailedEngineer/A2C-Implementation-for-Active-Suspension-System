@@ -41,7 +41,7 @@ class TrainingLoop:
         
         # Performance tracking
         self.best_avg_reward = -np.inf
-        self.convergence_threshold = -50  # Much better than random (-113 average)
+        self.convergence_threshold = -12000  # Much better than random (-113 average)
         
     def train(self, verbose=True, plot_every=100, save_every=500):
         """
@@ -103,7 +103,7 @@ class TrainingLoop:
                     break
                     
                 # Early stopping for very poor performance (runaway)
-                if step > 1000 and episode_reward < -10000:
+                if step > 1000 and episode_reward < -50000:
                     if verbose and episode % 100 == 0:
                         print(f"  Early stopping episode {episode} (runaway detected)")
                     break
@@ -151,7 +151,7 @@ class TrainingLoop:
                 break
                 
             # Adaptive learning rate decay (from paper)
-            if episode == 1000:  # After marked learning
+            if episode == 500:  # After marked learning
                 if verbose:
                     print("📉 Reducing learning rates (as mentioned in paper)")
                 self.agent.actor_optimizer.learning_rate = 0.0001

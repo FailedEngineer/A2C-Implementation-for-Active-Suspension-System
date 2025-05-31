@@ -72,7 +72,15 @@ for episode in range(MAX_EPISODES):
     for step in range(STEPS_PER_EPISODE):
         # Get action
         action, log_prob = agent.get_action(state)
-        
+        # In your SuspensionEnvironment.step() method, add:
+        # Limit the road derivative
+        zr_dot = np.clip(zr_dot, -4.0, 4.0)  # Max 4 m/s
+
+        # After getting body_velocity from the model:
+        body_velocity = np.clip(body_velocity, -2.0, 2.0)  # Max 2 m/s
+
+        # Limit reward per step
+        reward = max(reward, -500)  # Prevent extreme negatives
         # Step environment
         next_state, reward, done, info = env.step(action)
         

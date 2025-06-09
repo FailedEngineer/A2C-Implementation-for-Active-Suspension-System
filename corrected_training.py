@@ -56,7 +56,7 @@ def run_training():
 
     # 3. Setup Training Parameters
     MAX_EPISODES = 2000
-    STEPS_PER_EPISODE = 6000
+    STEPS_PER_EPISODE = 3000
     LR_REDUCTION_EPISODE = 500
     PRINT_EVERY = 20
     PLOT_EVERY = 100

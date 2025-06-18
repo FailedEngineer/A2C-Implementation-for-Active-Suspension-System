@@ -55,11 +55,11 @@ def run_training():
         print("🟡 No checkpoint found, starting from scratch.")
 
     # 3. Setup Training Parameters
-    MAX_EPISODES = 2000
-    STEPS_PER_EPISODE = 3000
-    LR_REDUCTION_EPISODE = 400
+    MAX_EPISODES = 5000
+    STEPS_PER_EPISODE = 6000
+    LR_REDUCTION_EPISODE = 3000
     PRINT_EVERY = 20
-    PLOT_EVERY = 100
+    PLOT_EVERY = 150
 
     # 4. The Training Loop (with save/resume logic)
     print("\n4️⃣  Starting training... (Press Ctrl+C to interrupt and save)")

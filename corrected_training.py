@@ -19,7 +19,7 @@ from RewardFunction import StableSuspensionEnvironment
 from NeuralNetworkTraining import ActorCriticAgent
 
 def run_training():
-    print("🚀 RUNNING TRAINING WITH CUSTOM ARCHITECTURES")
+    print("🚀 RUNNING TRAINING WITH PAPER's ARCHITECTURES")
     print("===================================================")
     
     # --- Checkpoint Configuration ---
@@ -44,7 +44,7 @@ def run_training():
         actor_optimizer=agent.actor_optimizer,
         critic_optimizer=agent.critic_optimizer
     )
-    manager = tf.train.CheckpointManager(checkpoint, checkpoint_dir, max_to_keep=3)
+    manager = tf.train.CheckpointManager(checkpoint, checkpoint_dir, max_to_keep=10)
 
     # --- Restore from Checkpoint ---
     checkpoint.restore(manager.latest_checkpoint)
@@ -57,7 +57,7 @@ def run_training():
     # 3. Setup Training Parameters
     MAX_EPISODES = 2000
     STEPS_PER_EPISODE = 3000
-    LR_REDUCTION_EPISODE = 500
+    LR_REDUCTION_EPISODE = 400
     PRINT_EVERY = 20
     PLOT_EVERY = 100
 
@@ -124,7 +124,7 @@ def plot_training_progress(episode_rewards, final=False):
     avg_series = pd.Series(episode_rewards).rolling(100, min_periods=1).mean()
     plt.plot(avg_series, color='red', linewidth=2, label='100-Episode Average')
     plt.xlabel("Episode"); plt.ylabel("Total Reward")
-    plt.title("Training Progress (Custom Architecture)"); plt.legend()
+    plt.title("Training Progress (Paper's Architecture)"); plt.legend()
     plt.grid(True, alpha=0.3); plt.tight_layout()
     if final:
         plt.savefig("custom_arch_training_progress.png")

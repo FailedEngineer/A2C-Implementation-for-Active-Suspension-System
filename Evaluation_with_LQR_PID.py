@@ -303,7 +303,7 @@ if __name__ == "__main__":
     parser.add_argument('--checkpoint_path', type=str, help='Path to a specific checkpoint file.')
     args = parser.parse_args()
 
-    checkpoint_to_load = args.checkpoint_path or tf.train.latest_checkpoint('./training_checkpoints')
+    checkpoint_to_load = args.checkpoint_path or tf.train.latest_checkpoint('./training_checkpoints_batched_v2')
 
     if not checkpoint_to_load:
         print("\n❌ Error: No checkpoint found. Please train a model first.")

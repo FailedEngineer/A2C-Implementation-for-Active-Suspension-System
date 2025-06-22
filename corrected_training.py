@@ -24,7 +24,7 @@ import os
 from Suspension_Model import QuarterCarModel
 from RewardFunction import StableSuspensionEnvironment
 # IMPORTANT: Use the new stabilized training file
-from NeuralNetworkArch import ActorCriticAgent
+from NeuralNetworkTraining import ActorCriticAgent
 
 # --- Check for GPU ---
 gpus = tf.config.experimental.list_physical_devices('GPU')
@@ -49,12 +49,12 @@ def run_training():
     # --- Configuration ---
     # NOTE: A new directory is used to prevent overwriting original checkpoints.
     # If you wish to use old checkpoints, change this path to './training_checkpoints'
-    checkpoint_dir = './training_checkpoints_batched'
+    checkpoint_dir = './training_checkpoints_batched_v2'
     os.makedirs(checkpoint_dir, exist_ok=True)
     
     MAX_EPISODES = 10000
-    STEPS_PER_EPISODE = 6000
-    BATCH_SIZE = 256  # Number of experiences to collect before a training update
+    STEPS_PER_EPISODE = 4500
+    BATCH_SIZE = 64  # Number of experiences to collect before a training update
     LR_REDUCTION_EPISODE = 7000
     PRINT_EVERY = 10
     PLOT_EVERY = 100

@@ -226,7 +226,7 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    checkpoint_dir = './training_checkpoints'
+    checkpoint_dir = './training_checkpoints_batched_v2'
 
     if args.checkpoint_path:
         checkpoint_to_load = args.checkpoint_path
